@@ -1,0 +1,2 @@
+-- DELETE FROM TOURNAMENT
+-- WHERE t_name = 'Non-representing Major';

@@ -1,0 +1,13 @@
+.vscode-server/*
+.config/*
+.dotnet/*
+.local/*
+.bash_history
+.bash_logout
+.bash_profile
+.bashrc
+.mysql_history
+testfile.txt
+mysql_scripts/tourneys_for_insert.csv
+mysql_scripts/testscript.sh
+.my.cnf

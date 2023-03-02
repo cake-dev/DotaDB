@@ -1,0 +1,23 @@
+Function name: Get players by team name
+Function type (query, update, etc.): Query
+Description: This function will return all players on a team.
+Primary users: Team managers, coaches, and players
+Tables affected: Player, Team
+Sample input: Team name
+Sample output: player_id, gamer_name, player_name, team_id, player_role
+
+Function name: Show teams with the highest earnings within a time period
+Function type (query, update, etc.): Query
+Description: This function will return all teams with the highest earnings within a time period.
+Primary users: Analysts, fans
+Tables affected: Team, Tournament
+Sample input: Start date, end date
+Sample output: team_id, team_name, team_winnings
+
+Function name: Add a new team with 5 new players
+Function type (query, update, etc.): Update
+Description: This function will add a new team with 5 new players.
+Primary users: Team managers
+Tables affected: Team, Player
+Sample input: team_name, player_name(s), gamer_name(s), player_role(s)
+Sample output: team_id, player_id(s)

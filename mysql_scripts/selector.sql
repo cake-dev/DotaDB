@@ -1,0 +1,39 @@
+-- ()select the teams with the highest t_prize sum
+-- select team_name,
+--     sum(t_prize) as total_prize
+-- from TEAM,
+--     TOURNAMENT
+-- where TEAM.team_id = TOURNAMENT.t_winner
+-- group by team_name
+-- order by total_prize desc
+-- limit 10;
+----------------------
+-- ()select the teams with the most tournaments won
+-- select team_name,
+--     count(t_winner) as total_wins
+-- from TEAM,
+--     TOURNAMENT
+-- where TEAM.team_id = TOURNAMENT.t_winner
+-- group by team_name
+-- order by total_wins desc
+-- limit 10;
+----------------------
+-- ()select the tournaments by date
+-- SELECT t_name,
+--     t_date
+-- FROM TOURNAMENT
+-- ORDER BY t_date desc
+-- LIMIT 10;
+--------------------------------
+-- ()select the teams with the highest prize sum within a time period
+-- SELECT team_name,
+--     sum(t_prize) as total_prize
+-- FROM TEAM,
+--     TOURNAMENT
+-- WHERE TEAM.team_id = TOURNAMENT.t_winner
+--     AND TOURNAMENT.t_date BETWEEN '2019-01-01' AND '2019-12-31'
+-- GROUP BY team_name
+-- ORDER BY total_prize desc
+-- LIMIT 10;
+------------------------
+-- ()select the
