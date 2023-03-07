@@ -1,24 +1,34 @@
--- ()select the teams with the highest t_prize sum
+-- () select the players from a team by team name
+-- SELECT p.player_id,
+--     p.gamer_name,
+--     p.player_name,
+--     p.team_id,
+--     p.player_role
+-- FROM PLAYER p
+--     INNER JOIN TEAM t ON p.team_id = t.team_id
+-- WHERE t.team_name = 'Team Secret';
+----------------------
+-- () select the teams with the highest t_prize sum
 -- select team_name,
 --     sum(t_prize) as total_prize
 -- from TEAM,
 --     TOURNAMENT
--- where TEAM.team_id = TOURNAMENT.t_winner
--- group by team_name
+-- WHERE TEAM.team_id = TOURNAMENT.t_winner
+-- GROUP BY team_name
 -- order by total_prize desc
 -- limit 10;
 ----------------------
--- ()select the teams with the most tournaments won
--- select team_name,
+-- () select the teams with the most tournaments won
+-- SELECT team_name,
 --     count(t_winner) as total_wins
--- from TEAM,
+-- FROM TEAM,
 --     TOURNAMENT
--- where TEAM.team_id = TOURNAMENT.t_winner
--- group by team_name
+-- WHERE TEAM.team_id = TOURNAMENT.t_winner
+-- GROUP BY team_name
 -- order by total_wins desc
 -- limit 10;
 ----------------------
--- ()select the tournaments by date
+-- () select the tournaments by date
 -- SELECT t_name,
 --     t_date
 -- FROM TOURNAMENT
@@ -36,4 +46,3 @@
 -- ORDER BY total_prize desc
 -- LIMIT 10;
 ------------------------
--- ()select the

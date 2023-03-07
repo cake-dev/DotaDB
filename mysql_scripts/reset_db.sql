@@ -64,8 +64,8 @@ CREATE TABLE HERO (
     move_speed_base int NOT NULL,
     turn_rate float NOT NULL
 );
+--gameplay_id int PRIMARY KEY AUTO_INCREMENT, <- I should not need this (composite key from player, game, hero)
 CREATE TABLE GAME_PERFORMANCE (
-    gameplay_id int PRIMARY KEY AUTO_INCREMENT,
     g_kills int NOT NULL DEFAULT 0,
     g_deaths int NOT NULL DEFAULT 0,
     g_assists int NOT NULL DEFAULT 0,
@@ -78,12 +78,14 @@ CREATE TABLE GAME_PERFORMANCE (
     hero_id int NOT NULL,
     FOREIGN KEY (player_id) REFERENCES PLAYER(player_id),
     FOREIGN KEY (game_id) REFERENCES GAME(game_id),
-    FOREIGN KEY (hero_id) REFERENCES HERO(hero_id)
+    FOREIGN KEY (hero_id) REFERENCES HERO(hero_id),
+    PRIMARY KEY (player_id, game_id, hero_id)
 );
 CREATE TABLE PLAYER_TEAM_HISTORY (
     player_id int,
     team_id int,
     join_date datetime DEFAULT CURRENT_TIMESTAMP,
+    leave_date datetime,
     FOREIGN KEY (player_id) REFERENCES PLAYER(player_id),
     PRIMARY KEY (player_id, team_id, join_date)
 );

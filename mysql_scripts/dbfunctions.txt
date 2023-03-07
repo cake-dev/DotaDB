@@ -21,3 +21,11 @@ Primary users: Team managers
 Tables affected: Team, Player
 Sample input: team_name, player_name(s), gamer_name(s), player_role(s)
 Sample output: team_id, player_id(s)
+
+Function name: Get all players with a specific role
+Function type (query, update, etc.): Query
+Description: This function will return all players with a specific role.
+Primary users: Team managers, coaches, analysts, fans
+Tables affected: Player
+Sample input: player_role
+Sample output: player_id, gamer_name, player_name, team_id, player_role
