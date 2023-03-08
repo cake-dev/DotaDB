@@ -15,6 +15,7 @@
 --                 HAVING count(player_id) < 5
 --             )
 --     );
+-- ----------------------
 -- () drop the teams with less than 5 players
 -- DELETE FROM TEAM
 -- WHERE team_id IN (
