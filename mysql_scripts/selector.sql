@@ -46,3 +46,38 @@
 -- ORDER BY total_prize desc
 -- LIMIT 10;
 ------------------------
+-- -- () select the teams with less than 5 players
+-- SELECT team_name, team_id
+-- FROM TEAM
+-- WHERE team_id IN (
+--         SELECT team_id
+--         FROM PLAYER
+--         GROUP BY team_id
+--         HAVING count(player_id) < 5
+--     );
+-- ------------------------
+-- -- () get the tournaments won by teams with less than 5 players, grouped by team and t_id
+-- SELECT t_name,
+--     team_name
+-- FROM TOURNAMENT,
+--     TEAM
+-- WHERE TOURNAMENT.t_winner = TEAM.team_id
+--     AND TEAM.team_id IN (
+--             SELECT team_id
+--             FROM PLAYER
+--             GROUP BY team_id
+--             HAVING count(player_id) < 5
+--         );
+-- -- ------------------------
+-- -- () get the teams and team id of teams with 5 or more players and 0 winnings
+-- SELECT team_name,
+--     team_id
+-- FROM TEAM
+-- WHERE team_id IN (
+--         SELECT team_id
+--         FROM PLAYER
+--         GROUP BY team_id
+--         HAVING count(player_id) >= 5
+--     )
+--     AND team_winnings = 0;
+-- -- -- ------------------------
