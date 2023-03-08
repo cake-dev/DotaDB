@@ -1,0 +1,16 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "webdev.cs.umt.edu",
+            "port": 22,
+            "driver": "MariaDB",
+            "name": "webdev",
+            "database": "jb240893",
+            "username": "jb240893"
+        }
+    ]
+}
