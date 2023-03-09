@@ -18,11 +18,11 @@ CREATE TABLE TEAM (
 );
 CREATE TABLE PLAYER (
     player_id int PRIMARY KEY AUTO_INCREMENT,
-    player_name varchar(128) NOT NULL,
+    player_name varchar(128) NOT NULL UNIQUE,
     gamer_name varchar(64) NOT NULL,
-    player_role varchar(32),
+    player_role varchar(32) CHECK (player_role IN ('Carry', 'Solo Middle', 'Offlaner', 'Support', 'Coach')),
     player_country varchar(32),
-    player_region varchar(32),
+    player_region varchar(32) CHECK (player_region IN ('North America', 'South America', 'Europe', 'China', 'Southeast Asia', 'CIS', 'Other')),
     player_rank int,
     team_id int,
     FOREIGN KEY (team_id) REFERENCES TEAM(team_id)
@@ -30,13 +30,13 @@ CREATE TABLE PLAYER (
 CREATE TABLE TOURNAMENT (
     t_id int PRIMARY KEY AUTO_INCREMENT,
     t_name varchar(64) NOT NULL,
-    t_date datetime NOT NULL,
+    t_date datetime NOT NULL CHECK (t_date > '2017-01-01 00:00:00'),
     t_prize int DEFAULT 0,
     t_winner int NOT NULL,
     FOREIGN KEY (t_winner) REFERENCES TEAM(team_id)
 );
 CREATE TABLE GAME (
-    game_id int PRIMARY KEY AUTO_INCREMENT,
+    game_id int PRIMARY KEY,
     game_winner int,
     game_duration int NOT NULL,
     game_date datetime NOT NULL,
@@ -64,7 +64,6 @@ CREATE TABLE HERO (
     move_speed_base int NOT NULL,
     turn_rate float NOT NULL
 );
---gameplay_id int PRIMARY KEY AUTO_INCREMENT, <- I should not need this (composite key from player, game, hero)
 CREATE TABLE GAME_PERFORMANCE (
     g_kills int NOT NULL DEFAULT 0,
     g_deaths int NOT NULL DEFAULT 0,
@@ -87,6 +86,7 @@ CREATE TABLE PLAYER_TEAM_HISTORY (
     join_date datetime DEFAULT '2017-01-01 00:00:00',
     leave_date datetime,
     FOREIGN KEY (player_id) REFERENCES PLAYER(player_id),
+    FOREIGN KEY (team_id) REFERENCES TEAM(team_id),
     PRIMARY KEY (player_id, team_id, join_date)
 );
 CREATE TABLE TEAM_GAME (

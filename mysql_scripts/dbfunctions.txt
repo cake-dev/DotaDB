@@ -1,31 +1,56 @@
 Function name: Get players by team name
 Function type (query, update, etc.): Query
 Description: This function will return all players on a team.
-Primary users: Team managers, coaches, and players
-Tables affected: Player, Team
+Primary users: Team managers/coaches/players
+Tables affected: Player/Team
 Sample input: Team name
-Sample output: player_id, gamer_name, player_name, team_id, player_role
+Sample output: player_id/gamer_name/player_name/team_id/player_role
 
 Function name: Show teams with the highest earnings within a time period
 Function type (query, update, etc.): Query
 Description: This function will return all teams with the highest earnings within a time period.
-Primary users: Analysts, fans
-Tables affected: Team, Tournament
-Sample input: Start date, end date
-Sample output: team_id, team_name, team_winnings
+Primary users: Analysts/fans
+Tables affected: Team/Tournament
+Sample input: Start date/end date
+Sample output: team_id/team_name/team_winnings
 
 Function name: Add a new team with 5 new players
 Function type (query, update, etc.): Update
 Description: This function will add a new team with 5 new players.
 Primary users: Team managers
-Tables affected: Team, Player
-Sample input: team_name, player_name(s), gamer_name(s), player_role(s)
-Sample output: team_id, player_id(s)
+Tables affected: Team/Player
+Sample input: team_name/player_name(s)/gamer_name(s)/player_role(s)
+Sample output: team_id/player_id(s)
 
 Function name: Get all players with a specific role
 Function type (query, update, etc.): Query
 Description: This function will return all players with a specific role.
-Primary users: Team managers, coaches, analysts, fans
+Primary users: Team managers/coaches/analysts/fans
 Tables affected: Player
 Sample input: player_role
-Sample output: player_id, gamer_name, player_name, team_id, player_role
+Sample output: player_id/gamer_name/player_name/team_id/player_role
+
+Function name: Move a player to a new team
+Function type (query, update, etc.): Update
+Description: This function will move a player to a new team.
+Primary users: Team managers
+Tables affected: PLAYER/PLAYER_TEAM_HISTORY
+Sample input: player_id/team_id
+Sample output: player_id/(new) team_id 
+
+Function name: Update team winnings after a Tournament
+Function type (query, update, etc.): Update
+Description: This function will update team winnings after a Tournament.
+Primary users: Team managers
+Tables affected: Team/Tournament
+Sample input: team_id/tournament_id/t_prize
+Sample output: team_id/team_winnings
+
+Function name: Calculate average earnings per player
+Function type (query, update, etc.): Query
+Description: This function will calculate average earnings per player.
+Primary users: Team managers, analysts, fans
+Tables affected: Player/Team
+Sample input: team_id
+Sample output: team_id/team_name/team_winnings/player_count/avg_earnings
+
