@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- a form with multiple buttons to perfrom a variety of sql queries -->
+    <form action="scripts/dota_db_query.php" method="post">
+        <input type="submit" name="selected" value="TEAM">
+        <input type="submit" name="selected" value="PLAYER">
+        <input type="submit" name="selected" value="TOURNAMENT">
+        <input type="submit" name="selected" value="HERO">
+        <input type="submit" name="selected" value="GAME">
+    </form>
+    <br>
+    <form action="scripts/dota_db_query.php" method="post">
+        <input type="text" name="team_name" value="">
+        <input type="submit" name="getPlayersByTeamName" value="Team Roster">
+    </form>
+    </form>
+</body>
+
+</html>
+<script>
+</script>
