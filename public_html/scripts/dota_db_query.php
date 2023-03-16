@@ -4,11 +4,10 @@ include('header.php');
 // connect to database
 $link = mysqli_connect("localhost", "jb240893", "ooc3kei8bahwei6ooF9aihoo4eedoo", "jb240893")
     or die('Could not connect ');
-echo "Connected successfully";
 
 if ($_POST['selected']) {
     $selected = $_POST['selected'];
-    //perform SQL query for the table with the button name, conditional based on button name
+    //perform SQL query for the table with the button name, based on button name
     $query = "SELECT * from " . $selected;
 
     $result = mysqli_query($link, $query)
@@ -35,7 +34,6 @@ WHERE t.team_name = '$teamname';";
         or die("Query failed ");
     echo "query ok";
 }
-
 
 
 // print results in html with a nicely formatted bootstrap table with column headings
