@@ -81,3 +81,8 @@
 --     )
 --     AND team_winnings = 0;
 -- -- -- ------------------------
+-- count the unique team1_id in TEAM_GAME
+-- SELECT
+--     count(distinct team1_id)
+-- FROM
+--     TEAM_GAME;

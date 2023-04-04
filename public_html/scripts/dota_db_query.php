@@ -45,6 +45,7 @@ if ($selected) {
 }
 
 echo " <table class='table table-striped table-bordered table-hover table-condensed'>\n";
+// prints the column headings
 echo "\t<tr>\n";
 while ($fieldinfo = $result->fetch_field()) {
     echo "\t\t<td>$fieldinfo->name</td>\n";
