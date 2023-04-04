@@ -151,3 +151,15 @@ CREATE TABLE ITEM_ABILITY(
     FOREIGN KEY (item_id) REFERENCES ITEM(item_id),
     PRIMARY KEY (item_id, ability_1)
 );
+
+CREATE TABLE GAME_ITEMS(
+   hero_id    INTEGER  NOT NULL
+  ,game_id    INTEGER  NOT NULL
+  ,item_id_1  INTEGER  NOT NULL
+  ,item_id_2  INTEGER  NOT NULL
+  ,item_id_3  INTEGER  NOT NULL
+  ,item_id_4  INTEGER  NOT NULL
+  ,item_id_5  INTEGER  NOT NULL,
+  PRIMARY KEY (hero_id, game_id, item_id_1),
+  FOREIGN KEY (game_id) REFERENCES GAME(game_id)
+);
