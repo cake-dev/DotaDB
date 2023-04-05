@@ -1,12 +1,3 @@
-CREATE TABLE ITEM_ABILITY(
-    item_id INTEGER NOT NULL AUTO_INCREMENT,
-    ability_1 VARCHAR(512) NOT NULL DEFAULT 'none',
-    ability_2 VARCHAR(512) NOT NULL DEFAULT 'none',
-    ability_3 VARCHAR(512) NOT NULL DEFAULT 'none',
-    FOREIGN KEY (item_id) REFERENCES ITEM(item_id),
-    PRIMARY KEY (item_id, ability_1)
-);
-
 INSERT INTO
     ITEM_ABILITY(ability_1, ability_2, ability_3)
 VALUES

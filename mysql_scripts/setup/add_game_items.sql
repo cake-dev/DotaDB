@@ -1,14 +1,3 @@
-CREATE TABLE GAME_ITEMS(
-   hero_id    INTEGER  NOT NULL
-  ,game_id    INTEGER  NOT NULL
-  ,item_id_1  INTEGER  NOT NULL
-  ,item_id_2  INTEGER  NOT NULL
-  ,item_id_3  INTEGER  NOT NULL
-  ,item_id_4  INTEGER  NOT NULL
-  ,item_id_5  INTEGER  NOT NULL,
-  PRIMARY KEY (hero_id, game_id, item_id_1),
-  FOREIGN KEY (game_id) REFERENCES GAME(game_id)
-);
 INSERT INTO GAME_ITEMS(hero_id,game_id,item_id_1,item_id_2,item_id_3,item_id_4,item_id_5) VALUES
  (11,1,135,48,122,64,112)
 ,(112,1,23,47,5,26,143)

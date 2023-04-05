@@ -1,4 +1,4 @@
-INSERT INTO mytable(t_name,t_date,t_prize,t_winner) VALUES
+INSERT INTO TOURNAMENT(t_name,t_date,t_prize,t_winner) VALUES
  ('Kuala Lumpur Major','2017-03-19',280000,5)
 ,('Jerusalem Qualifier','2017-04-09',10000,15)
 ,('Belgrade Pro Series','2017-04-14',20000,26)

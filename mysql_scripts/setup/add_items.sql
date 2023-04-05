@@ -1,24 +1,3 @@
-CREATE TABLE ITEM(
-    item_id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    item_name VARCHAR(25) NOT NULL,
-    item_cost INTEGER NOT NULL,
-    str_bonus NUMERIC(4, 1) DEFAULT 0,
-    agi_bonus NUMERIC(4, 1) DEFAULT 0,
-    int_bonus NUMERIC(4, 1) DEFAULT 0,
-    health_bonus NUMERIC(5, 1) DEFAULT 0,
-    mana_bonus INTEGER DEFAULT 0,
-    hp_regen_bonus NUMERIC(4, 2) DEFAULT 0,
-    mana_regen_bonus NUMERIC(4, 2) DEFAULT 0,
-    armor_bonus NUMERIC(4, 1) DEFAULT 0,
-    evasion_bonus NUMERIC(4, 2) DEFAULT 0,
-    resistance_bonus NUMERIC(3, 1) DEFAULT 0,
-    spell_amp_bonus NUMERIC(4, 2) DEFAULT 0,
-    damage_bonus INTEGER DEFAULT 0,
-    attack_speed_bonus NUMERIC(5, 1) DEFAULT 0,
-    move_speed_bonus INTEGER DEFAULT 0,
-    item_type VARCHAR(7) NOT NULL
-);
-
 INSERT INTO
     ITEM(
         item_name,
