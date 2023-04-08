@@ -12,7 +12,6 @@ if ($_POST['selected']) {
 
     $result = mysqli_query($link, $query)
         or die("Query failed ");
-    echo "query ok";
 }
 
 if ($_POST['team_name']) {
@@ -24,8 +23,7 @@ if ($_POST['team_name']) {
     p.team_id,
     p.player_role,
     p.player_country,
-    p.player_region,
-    p.player_rank
+    p.player_region
 FROM PLAYER p
     INNER JOIN TEAM t ON p.team_id = t.team_id
 WHERE t.team_name = '$teamname';";

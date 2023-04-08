@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS `jb240893`.`GAME_ITEMS`;
 SET FOREIGN_KEY_CHECKS = 1;
 -- add all tables
 SOURCE create_tables.sql;
--- add teams
+-- add data to tables
 SOURCE setup/add_teams.sql;
 SOURCE setup/add_heroes.sql;
 SOURCE setup/add_players.sql;
