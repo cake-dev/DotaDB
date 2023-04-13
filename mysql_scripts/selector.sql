@@ -164,3 +164,87 @@
 -- LIMIT
 --     10;
 -------------------
+-- 
+-- SELECT 
+--     p.player_name,
+--     p.player_role,
+--     CASE 
+--         WHEN p.player_role = 'carry' THEN ROUND((t.team_winnings * 0.4) / COUNT(p.player_id), 2)
+--         WHEN p.player_role = 'support' THEN ROUND((t.team_winnings * 0.2) / COUNT(p.player_id), 2)
+--         WHEN p.player_role = 'solo middle' THEN ROUND((t.team_winnings * 0.25) / COUNT(p.player_id), 2)
+--         WHEN p.player_role = 'offlaner' THEN ROUND((t.team_winnings * 0.3) / COUNT(p.player_id), 2)
+--         WHEN p.player_role = 'coach' THEN ROUND((t.team_winnings * 0.05) / COUNT(p.player_id), 2)
+--         ELSE 0
+--     END AS player_earnings
+-- FROM 
+--     TEAM t 
+--     INNER JOIN PLAYER p ON t.team_id = p.team_id 
+-- WHERE 
+--     t.team_name = 'Infamous'
+-- GROUP BY 
+--     p.player_name;
+-- seelct players and their earnings from a team
+-- SELECT 
+--     ROUND(
+--         CASE p.player_role 
+--             WHEN 'Carry' THEN 
+--                 LEAST(t.team_winnings, (COUNT(p.player_id) * 0.2 * t.team_winnings)) / COUNT(p.player_id)
+--             WHEN 'Solo Middle' THEN 
+--                 LEAST(t.team_winnings, (COUNT(p.player_id) * 0.15 * t.team_winnings)) / COUNT(p.player_id)
+--             WHEN 'Offlaner' THEN 
+--                 LEAST(t.team_winnings, (COUNT(p.player_id) * 0.15 * t.team_winnings)) / COUNT(p.player_id)
+--             WHEN 'Support' THEN 
+--                 LEAST(t.team_winnings, (COUNT(p.player_id) * 0.10 * t.team_winnings)) / COUNT(p.player_id)
+--             WHEN 'Coach' THEN 
+--                 LEAST(t.team_winnings, (COUNT(p.player_id) * 0.05 * t.team_winnings)) / COUNT(p.player_id)
+--         END, 2
+--     ) AS player_earnings,
+--     p.player_name
+-- FROM 
+--     TEAM t 
+--     INNER JOIN PLAYER p ON t.team_id = p.team_id 
+-- WHERE 
+--     t.team_name = 'Infamous'
+-- GROUP BY 
+--     p.player_name;
+-------------------
+-- SELECT t.team_name, COUNT(CASE when g.game_winner = t.team_id then 1 end)/COUNT(CASE when t.team_id = tg.team1_id OR t.team_id = tg.team2_id then 1 end) as winrate
+-- FROM TEAM t, GAME g, TEAM_GAME tg
+-- WHERE t.team_id = tg.team1_id OR t.team_id = tg.team2_id
+-- AND tg.game_id = g.game_id
+-- GROUP BY t.team_name
+-- ORDER BY winrate DESC;
+-------------------
+-- seelct the number of games played by each team
+-- SELECT
+--     team_name,
+--     count(game_id) as games_played
+-- FROM
+--     TEAM,
+--     TEAM_GAME
+-- WHERE
+--     TEAM.team_id = TEAM_GAME.team1_id
+--     OR TEAM.team_id = TEAM_GAME.team2_id
+-- GROUP BY
+--     team_name
+-- ORDER BY
+--     games_played desc;
+-------------------
+-- select the number of games won by each team
+SELECT
+    t.team_name,
+    count(g.game_id) as games_won
+FROM
+    TEAM t,
+    TEAM_GAME tg,
+    GAME g
+WHERE
+    t.team_id = tg.team1_id
+    OR t.team_id = tg.team2_id
+    AND tg.game_id = g.game_id
+    AND g.game_winner = t.team_id
+GROUP BY
+    t.team_name
+ORDER BY
+    games_won desc;
+-------------------

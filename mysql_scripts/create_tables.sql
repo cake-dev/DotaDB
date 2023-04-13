@@ -31,7 +31,7 @@ CREATE TABLE PLAYER (
         )
     ),
     player_rank int,
-    team_id int,
+    team_id int DEFAULT 0,
     FOREIGN KEY (team_id) REFERENCES TEAM(team_id)
 );
 

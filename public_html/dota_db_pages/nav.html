@@ -16,6 +16,14 @@
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <!-- a form to reset the db -->
+                        <form action="reset_db.php" method="post">
+                            <input type="submit" value="Reset DB" />
+                        </form>
+                    </a>
+                </li>
                 <li class="nav-item dropdown">
 
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -25,8 +33,28 @@
                         </span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="player.php">Player</a>
+                        <a class="dropdown-item" href="analyst.php">Analyst</a>
                         <a class="dropdown-item" href="team_manager.php">Team Manager</a>
+                        <!-- RESET DATABASE LINK sends an ajax request to the reset_db.php -->
+                        <!-- <a class="dropdown-item" onclick="resetDB()">Reset Database</a>
+                        <script>
+                            // This script is used to reset the database
+                            // It sends an ajax request to the reset_db.php
+                            // The reset_db.php will reset the database and return a message
+                            // The message will be displayed in the alert box
+                            function resetDB() {
+                                $.ajax({
+                                    url: "reset_db.php",
+                                    type: "POST",
+                                    success: function () {
+                                        alert('Successfully Reset Database');
+                                    },
+                                    error: function () {
+                                        alert('Something went wrong');
+                                    }
+                                });
+                            }
+                        </script> -->
                     </div>
                 </li>
         </div>

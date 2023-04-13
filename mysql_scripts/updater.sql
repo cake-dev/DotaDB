@@ -90,3 +90,18 @@
 -- WHERE
 --     game_date = t_date;
 -- ----------------------------
+-- () a query to move a player to a new team, given a team name and gamer name
+UPDATE
+    PLAYER
+SET
+    team_id = (
+        SELECT
+            team_id
+        FROM
+            TEAM
+        WHERE
+            team_name = 'NO_TEAM'
+    )
+WHERE
+    gamer_name = 'BullyHunter';
+-- ----------------------------

@@ -12,3 +12,4 @@ mysql_scripts/tourneys_for_insert.csv
 mysql_scripts/testscript.sh
 .my.cnf
 public_html/scripts/dota_db_query.php
+.bito/uid/vscode.json

@@ -30,7 +30,6 @@ WHERE t.team_name = '$teamname';";
 
     $result = mysqli_query($link, $query)
         or die("Query failed ");
-    echo "query ok";
 }
 
 

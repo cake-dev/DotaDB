@@ -1,3 +1,4 @@
+START TRANSACTION;
 -- drop all tables
 SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `jb240893`.`GAME_PERFORMANCE`;
@@ -31,3 +32,6 @@ SOURCE setup/add_team_history.sql;
 
 -- update team winnings
 SOURCE setup/update_team_winnings.sql;
+
+-- end
+COMMIT;
