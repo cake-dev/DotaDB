@@ -1,4 +1,5 @@
 <?php
+header( "refresh:3;url=index.php" );
 // resets the database
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
