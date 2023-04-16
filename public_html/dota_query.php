@@ -3,7 +3,7 @@
 
 <head>
     <?php
-    include('../scripts/header.php');
+    include('scripts/header.php');
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,9 +51,6 @@
                             $selected = $_POST['selected'];
                             //perform SQL query for the table with the button name, based on button name
                             $query = "SELECT * from " . $selected;
-
-                            $result = mysqli_query($link, $query)
-                                or die("Query failed ");
                         }
 
                         if ($_POST['team_name']) {
@@ -70,8 +67,6 @@
                                                 INNER JOIN TEAM t ON p.team_id = t.team_id
                                             WHERE t.team_name = '$teamname';";
 
-                            $result = mysqli_query($link, $query)
-                                or die("Query failed ");
                         }
 
                         if ($_POST['team_region']) {
@@ -115,9 +110,6 @@
                             $player_role = $_POST['player_role'];
                             //perform SQL query for the table with the button name, based on button name
                             $query = "SELECT * FROM PLAYER WHERE player_role = '$player_role'";
-
-                            $result = mysqli_query($link, $query)
-                                or die("Query failed ");
                         }
 
                         if ($_POST['team_name_earnings']) {
@@ -147,10 +139,37 @@
                             p.player_name;
                             ";
 
-                            $result = mysqli_query($link, $query)
-                                or die("Query failed ");
+
                         }
                         
+                        if($_POST['start_date']) {
+                            $start_date = $_POST['start_date'];
+                            $end_date = $_POST['end_date'];
+                            $query = "SELECT
+                                item_name,
+                                count(item_name) as total_uses
+                            FROM
+                                ITEM,
+                                GAME_ITEMS,
+                                GAME
+                            WHERE
+                                ITEM.item_id in (GAME_ITEMS.item_id_1, GAME_ITEMS.item_id_2, GAME_ITEMS.item_id_3, GAME_ITEMS.item_id_4, GAME_ITEMS.item_id_5)
+                                AND GAME_ITEMS.game_id = GAME.game_id
+                                AND GAME.game_date BETWEEN '$start_date' AND '$end_date'
+                            GROUP BY
+                                item_name
+                            ORDER BY
+                                total_uses desc
+                            LIMIT
+                                10;";
+                        }
+
+                        // $clean_query = htmlspecialchars($query);
+
+                        // echo $clean_query;
+
+                        $result = mysqli_query($link, $query)
+                            or die("Query failed ");
 
 
                         // print results in html with a nicely formatted bootstrap table with column headings

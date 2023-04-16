@@ -2,192 +2,320 @@
 <html lang="en">
 
 <head>
+    <?php
+    include('scripts/header.php');
+    ?>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dota DB Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <!-- https://fonts.google.com/specimen/Roboto -->
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <!--
+    Product Admin CSS Template
+    https://templatemo.com/tm-524-product-admin
+    -->
 </head>
 
-<body>
-    <!-- a link to webpage.php -->
-    <a href="dota_db_pages/index.php">Dashboard</a>
-    <!-- a form with multiple buttons to perfrom a variety of sql queries -->
-    <form action="scripts/dota_db_query.php" method="post">
-        <label for="selected">Select all:</label>
-        <input type="submit" name="selected" value="TEAM">
-        <input type="submit" name="selected" value="PLAYER">
-        <input type="submit" name="selected" value="TOURNAMENT">
-        <input type="submit" name="selected" value="GAME">
-        <input type="submit" name="selected" value="HERO">
-        <input type="submit" name="selected" value="ITEM">
-        <input type="submit" name="selected" value="ITEM_ABILITY">
-        <input type="submit" name="selected" value="GAME_ITEMS">
-        <input type="submit" name="selected" value="GAME_PERFORMANCE">
-        <input type="submit" name="selected" value="TEAM_GAME">
-        <input type="submit" name="selected" value="TOURNAMENT_GAMES">
-        <input type="submit" name="selected" value="PLAYER_TEAM_HISTORY">
-    </form>
-    <br>
-    <form action="scripts/dota_db_query.php" method="post">
-        <select name="team_name" id="team_name">
-            <option value="team_name">Team Name</option>
-            <?php
-            $link = mysqli_connect("localhost", "jb240893", "ooc3kei8bahwei6ooF9aihoo4eedoo", "jb240893")
-                or die('Could not connect ');
-            $query = "SELECT team_name FROM TEAM ORDER BY team_name ASC";
-            $result = mysqli_query($link, $query)
-                or die("Query failed ");
-            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                foreach ($row as $col_value) {
-                    echo "<option value='$col_value'>$col_value</option>";
+
+<body id="reportsPage">
+    <div class="" id="home">
+        <!--Navigation bar-->
+        <div id="nav-placeholder">
+
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('#nav-placeholder').load('nav.html');
+            });
+        </script>
+        <!--end of Navigation bar-->
+        <div class="container">
+            <!-- <div class="row">
+                <div class="col">
+                    <p class="text-white mt-5 mb-5">Welcome back, <b>Admin</b></p>
+                </div>
+            </div> -->
+            <!-- row -->
+            <div class="row tm-content-row">
+                <!-- <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block">
+                        <h2 class="tm-block-title">Latest Hits</h2>
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block">
+                        <h2 class="tm-block-title">Performance</h2>
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div> -->
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller">
+                        <h2 class="tm-block-title">Welcome </h2>
+                        <div id="stuffContainer">
+                            <p class="text-white mt-5 mb-5">Welcome to the Dota DB Dashboard. Here you can view all the tables in the database, as well as a list of recent games.</p>
+                            <p class="text-white mt-5 mb-5">Additional functions are found through the functions tab at the top.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-overflow">
+                        <h2 class="tm-block-title">All Tables</h2>
+                        <div class="tm-notification-items">
+                            <form action="dota_query.php" method="post">
+                                <div class="media tm-notification-item">
+                                    <div class="tm-gray-circle"><img src="img/db_icon.png" alt="Avatar Image" class="rounded-circle"></div>
+                                    <div class="media-body">
+                                        <div class="text-center">
+                                            <input type="submit" name="selected" value="TEAM" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media tm-notification-item">
+                                    <div class="tm-gray-circle"><img src="img/db_icon.png" alt="Avatar Image" class="rounded-circle"></div>
+                                    <div class="media-body">
+                                        <div class="text-center">
+                                            <input type="submit" name="selected" value="PLAYER" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media tm-notification-item">
+                                    <div class="tm-gray-circle"><img src="img/db_icon.png" alt="Avatar Image" class="rounded-circle"></div>
+                                    <div class="media-body">
+                                        <div class="text-center">
+                                            <input type="submit" name="selected" value="TOURNAMENT" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media tm-notification-item">
+                                    <div class="tm-gray-circle"><img src="img/db_icon.png" alt="Avatar Image" class="rounded-circle"></div>
+                                    <div class="media-body">
+                                        <div class="text-center">
+                                            <input type="submit" name="selected" value="GAME" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media tm-notification-item">
+                                    <div class="tm-gray-circle"><img src="img/db_icon.png" alt="Avatar Image" class="rounded-circle"></div>
+                                    <div class="media-body">
+                                        <div class="text-center">
+                                            <input type="submit" name="selected" value="HERO" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media tm-notification-item">
+                                    <div class="tm-gray-circle"><img src="img/db_icon.png" alt="Avatar Image" class="rounded-circle"></div>
+                                    <div class="media-body">
+                                        <div class="text-center">
+                                            <input type="submit" name="selected" value="ITEM" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media tm-notification-item">
+                                    <div class="tm-gray-circle"><img src="img/db_icon.png" alt="Avatar Image" class="rounded-circle"></div>
+                                    <div class="media-body">
+                                        <div class="text-center">
+                                            <input type="submit" name="selected" value="ITEM_ABILITY" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media tm-notification-item">
+                                    <div class="tm-gray-circle"><img src="img/db_icon.png" alt="Avatar Image" class="rounded-circle"></div>
+                                    <div class="media-body">
+                                        <div class="text-center">
+                                            <input type="submit" name="selected" value="GAME_PERFORMANCE" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media tm-notification-item">
+                                    <div class="tm-gray-circle"><img src="img/db_icon.png" alt="Avatar Image" class="rounded-circle"></div>
+                                    <div class="media-body">
+                                        <div class="text-center">
+                                            <input type="submit" name="selected" value="GAME_ITEMS" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media tm-notification-item">
+                                    <div class="tm-gray-circle"><img src="img/db_icon.png" alt="Avatar Image" class="rounded-circle"></div>
+                                    <div class="media-body">
+                                        <div class="text-center">
+                                            <input type="submit" name="selected" value="TEAM_GAME" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media tm-notification-item">
+                                    <div class="tm-gray-circle"><img src="img/db_icon.png" alt="Avatar Image" class="rounded-circle"></div>
+                                    <div class="media-body">
+                                        <div class="text-center">
+                                            <input type="submit" name="selected" value="TOURNAMENT_GAMES" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media tm-notification-item">
+                                    <div class="tm-gray-circle"><img src="img/db_icon.png" alt="Avatar Image" class="rounded-circle"></div>
+                                    <div class="media-body">
+                                        <div class="text-center">
+                                            <input type="submit" name="selected" value="PLAYER_TEAM_HISTORY" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+                        <h2 class="tm-block-title">Recent Games</h2>
+                        <?php
+                        include('header.php');
+                        // connect to database
+                        $link = mysqli_connect("localhost", "jb240893", "ooc3kei8bahwei6ooF9aihoo4eedoo", "jb240893")
+                            or die('Could not connect ');
+
+                        // selects the most recent 100 games with the team names and game duration
+                        $query = "SELECT g.game_id, g.game_date, tw.team_name AS winner_name, tl.team_name AS loser_name, g.game_duration
+                        FROM GAME g
+                        JOIN TEAM tw ON g.game_winner = tw.team_id
+                        JOIN (
+                            SELECT tg.game_id, t.team_id AS team_id
+                            FROM TEAM_GAME tg
+                            JOIN TEAM t ON t.team_id = tg.team1_id
+                            UNION ALL
+                            SELECT tg.game_id, t.team_id AS team_id
+                            FROM TEAM_GAME tg
+                            JOIN TEAM t ON t.team_id = tg.team2_id
+                        ) tg ON g.game_id = tg.game_id
+                        JOIN TEAM tl ON tl.team_id = (
+                            CASE
+                                WHEN g.game_winner = tg.team_id THEN (
+                                    SELECT team_id
+                                    FROM (
+                                        SELECT tg.game_id, t.team_id AS team_id
+                                        FROM TEAM_GAME tg
+                                        JOIN TEAM t ON t.team_id = tg.team1_id
+                                        UNION ALL
+                                        SELECT tg.game_id, t.team_id AS team_id
+                                        FROM TEAM_GAME tg
+                                        JOIN TEAM t ON t.team_id = tg.team2_id
+                                    ) t2
+                                    WHERE t2.game_id = g.game_id AND t2.team_id != g.game_winner
+                                    LIMIT 1
+                                )
+                            END
+                        )
+                        ORDER BY g.game_id DESC
+                        LIMIT 100;
+                        ";
+
+                        $result = mysqli_query($link, $query)
+                            or die("Query failed ");
+
+                        echo " <table id='games_table' class='table table-striped table-bordered table-hover table-condensed'>\n";
+                        // prints the column headings
+                        echo "\t<tr>\n";
+                        while ($fieldinfo = $result->fetch_field()) {
+                            echo "\t\t<td>$fieldinfo->name</td>\n";
+                            //echo"";
+                        }
+                        echo "\t</tr>\n";
+
+                        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+
+                            echo "\t<tr>\n";
+                            foreach ($row as $col_value) {
+                                echo "\t\t<td>$col_value</td>\n";
+                            }
+                            echo "\t</tr>\n";
+                        }
+                        echo "</table>\n";
+
+                        //Free result set
+                        mysqli_free_result($result);
+
+                        //close connection
+                        mysqli_close($link);
+
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--footer area-->
+        <div id="footer-placeholder">
+
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('#footer-placeholder').load("footer.html");
+            });
+
+            // replace the table headings with proper names
+            $(document).ready(function () {
+                var table = document.getElementById("games_table");
+                var header = table.rows[0];
+                var cells = header.cells;
+                cells[0].innerHTML = "Game ID";
+                cells[1].innerHTML = "Game Date";
+                cells[2].innerHTML = "Winner";
+                cells[3].innerHTML = "Loser";
+                cells[4].innerHTML = "Game Duration";
+                // add m to the game duration column values
+                for (var i = 1, row; row = table.rows[i]; i++) {
+                    var cell = row.cells[4];
+                    cell.innerHTML = cell.innerHTML + "m";
                 }
-            }
-            //Free result set
-            mysqli_free_result($result);
-
-            //close connection
-            mysqli_close($link);
-            ?>
-        </select>
-        <input type="submit" name="getPlayersByTeamName" value="Team Roster">
-    </form>
-    <br>
-    <!-- a form for getting player info -->
-
-    <form action="scripts/show_player_info.php" method="post">
-        <select name="playerName" id="playerNameSelect">
-            <option value="team_name">Player Name</option>
-            <?php
-            $link = mysqli_connect("localhost", "jb240893", "ooc3kei8bahwei6ooF9aihoo4eedoo", "jb240893")
-                or die('Could not connect ');
-            $query = "SELECT gamer_name FROM PLAYER ORDER BY gamer_name ASC";
-            $result = mysqli_query($link, $query)
-                or die("Query failed ");
-            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                foreach ($row as $col_value) {
-                    echo "<option value='$col_value'>$col_value</option>";
-                }
-            }
-            //Free result set
-            mysqli_free_result($result);
-
-            //close connection
-            mysqli_close($link);
-            ?>
-        </select>
-        <input type="submit" name="getPlayerInfo" value="Player Info">
-    </form>
-
-    <br>
-
-    <!-- form for getting the teams with the highest earnings between two dates -->
-    <form action="scripts/get_teams_highest_earnings.php" method="post">
-        <label for="start">Start date:</label>
-        <input type="date" id="start" name="date_start" value="2017-03-19" min="2017-03-19" max="2022-12-31">
-        <label for="end">End date:</label>
-        <input type="date" id="end" name="date_end" value="2017-03-20" min="2017-03-20" max="2022-12-31">
-        <input type="submit" name="getTeamEarnings" value="Show Winnings">
-    </form>
-
-    <br>
-
-    <!-- form for adding a new team -->
-    <div class="container">
-        <form action="scripts/add_new_team.php" method="post">
-            <div class="form-group">
-                <label for="team_id">Team ID:</label>
-                <input type="number" class="form-control" id="team_id" name="team_id" required>
-            </div>
-            <div class="form-group">
-                <label for="team_name">Team Name:</label>
-                <input type="text" class="form-control" id="team_name" name="team_name" required>
-            </div>
-            <div class="form-group">
-                <label for="team_region">Team Region:</label>
-                <select id="team_region" name="team_region" class="form-control" required>
-                    <option value="North America">North America</option>
-                    <option value="South America">South America</option>
-                    <option value="Europe">Europe</option>
-                    <option value="China">China</option>
-                    <option value="Southeast Asia">Southeast Asia</option>
-                    <option value="CIS">CIS</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Add Team</button>
-        </form>
-    </div>
-    <!-- end new team form -->
-
-    <br>
-
-    <!-- form for adding a new player -->
-    <form action="scripts/add_new_player.php" method="post">
-        <h3>Add new player</h3>
-        <label for="team_id">Player Team ID:</label>
-        <input type="number" id="team_id" name="team_id" required><br>
-
-        <label for="player_name">Player Name:</label>
-        <input type="text" id="player_name" name="player_name" required><br>
-        <label for="gamer_name">Gamer Name:</label>
-        <input type="text" id="gamer_name" name="gamer_name" required><br>
-        <label for="player_role">Player Role:</label>
-        <select id="player_role" name="player_role" required>
-            <option value="Carry">Carry</option>
-            <option value="Solo Middle">Solo Middle</option>
-            <option value="Offlaner">Offlaner</option>
-            <option value="Support">Support</option>
-            <option value="Coach">Coach</option>
-        </select><br>
-        <label for="player_country">Player Country:</label>
-        <input type="text" id="player_country" name="player_country"><br>
-        <label for="player_region">Player Region:</label>
-        <select id="player_region" name="player_region" required>
-            <option value="North America">North America</option>
-            <option value="South America">South America</option>
-            <option value="Europe">Europe</option>
-            <option value="China">China</option>
-            <option value="Southeast Asia">Southeast Asia</option>
-            <option value="CIS">CIS</option>
-            <option value="Other">Other</option>
-        </select><br>
-
-        <input type="submit" value="Add Player">
-
-    </form>
-    <!-- end new player form -->
-    <br>
-
-    <!-- <form action="scripts/show_player_info.php" method="post">
-        <input type="text" id="playerNameField" placeholder="Enter player name" name="playerName">
-        <input type="submit" name="getPlayerInfo" value="Player Info">
-    </form> -->
-
-    <!-- <input type="text" id="playerName" placeholder="Enter player name">
-    <button id="submit-btn" onclick="showPlayerInfo()" type="submit">Submit</button> -->
-
-    <script>
-
-        function showPlayerInfo() {
-            var request = {
-                playerName: $('#playerName').val()
-            };
-            $.ajax({
-                url: "scripts/show_player_info.php",
-                type: "POST",
-                data: request,
-                success: function () {
-                    alert('Successfully connected to the server');
-                },
-                error: function () {
-                    alert('Something went wrong');
+                // remove the time from the game date column values
+                for (var i = 1, row; row = table.rows[i]; i++) {
+                    var cell = row.cells[1];
+                    cell.innerHTML = cell.innerHTML.substring(0, 10);
                 }
             });
-        }
+        </script>
+        <!--end of footer area-->
+    </div>
 
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="js/moment.min.js"></script>
+    <!-- https://momentjs.com/ -->
+    <script src="js/Chart.min.js"></script>
+    <!-- http://www.chartjs.org/docs/latest/ -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- https://getbootstrap.com/ -->
+    <script src="js/tooplate-scripts.js"></script>
+    <script>
+        // Chart.defaults.global.defaultFontColor = 'white';
+        // let ctxLine,
+        //     ctxBar,
+        //     ctxPie,
+        //     optionsLine,
+        //     optionsBar,
+        //     optionsPie,
+        //     configLine,
+        //     configBar,
+        //     configPie,
+        //     lineChart;
+        // barChart, pieChart;
+        // // DOM is ready
+        // $(function () {
+        //     drawLineChart(); // Line Chart
+        //     drawBarChart(); // Bar Chart
+        //     drawPieChart(); // Pie Chart
+
+        //     $(window).resize(function () {
+        //         updateLineChart();
+        //         updateBarChart();
+        //     });
+        // })
     </script>
+</body>
 
 </html>
-<script>
-</script>

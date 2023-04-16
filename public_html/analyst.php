@@ -3,7 +3,7 @@
 
 <head>
   <?php
-  include('../scripts/header.php');
+  include('scripts/header.php');
   ?>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -92,6 +92,23 @@
         </div>
       </div> -->
     </div>
+    <div class="row tm-content-row">
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+        <div class="tm-bg-primary-dark tm-block tm-block-taller">
+          <h2 class="tm-block-title">Top Items</h2>
+          <form action="dota_query.php" method="post">
+            <div class="form-group col-lg-6">
+              <label for="start_date">Start date:</label>
+              <input type="date" name="start_date" id="start_date" class="form-control" min="2017-03-19" max="2022-04-17">
+              <label for="end_date">End date:</label>
+              <input type="date" name="end_date" id="end_date" class="form-control" min="2017-03-20" max="2022-04-17">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block text-uppercase">View</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
   </div>
   <!--footer area-->
   <div id="footer-placeholder">
