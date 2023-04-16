@@ -6,3 +6,4 @@ JOIN ITEM i ON gi.item_id_1 = i.item_id OR gi.item_id_2 = i.item_id
 GROUP BY i.item_name
 ORDER BY item_count DESC
 LIMIT 10;
+-- a qeury to select the top 10 items in the game

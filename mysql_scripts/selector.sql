@@ -146,23 +146,23 @@
 --     );
 --------------
 -- () select the names of the most used items for games in 2017
--- SELECT
---     item_name,
---     count(item_name) as total_uses
--- FROM
---     ITEM,
---     GAME_ITEMS,
---     GAME
--- WHERE
---     ITEM.item_id in (GAME_ITEMS.item_id_1, GAME_ITEMS.item_id_2, GAME_ITEMS.item_id_3, GAME_ITEMS.item_id_4, GAME_ITEMS.item_id_5)
---     AND GAME_ITEMS.game_id = GAME.game_id
---     AND GAME.game_date BETWEEN '2017-01-01' AND '2017-12-31'
--- GROUP BY
---     item_name
--- ORDER BY
---     total_uses desc
--- LIMIT
---     10;
+SELECT
+    item_name,
+    count(item_name) as total_uses
+FROM
+    ITEM,
+    GAME_ITEMS,
+    GAME
+WHERE
+    ITEM.item_id in (GAME_ITEMS.item_id_1, GAME_ITEMS.item_id_2, GAME_ITEMS.item_id_3, GAME_ITEMS.item_id_4, GAME_ITEMS.item_id_5)
+    AND GAME_ITEMS.game_id = GAME.game_id
+    AND GAME.game_date BETWEEN '2017-01-01' AND '2017-12-31'
+GROUP BY
+    item_name
+ORDER BY
+    total_uses desc
+LIMIT
+    10;
 -------------------
 -- 
 -- SELECT 
@@ -231,20 +231,45 @@
 --     games_played desc;
 -------------------
 -- select the number of games won by each team
-SELECT
-    t.team_name,
-    count(g.game_id) as games_won
-FROM
-    TEAM t,
-    TEAM_GAME tg,
-    GAME g
-WHERE
-    t.team_id = tg.team1_id
-    OR t.team_id = tg.team2_id
-    AND tg.game_id = g.game_id
-    AND g.game_winner = t.team_id
-GROUP BY
-    t.team_name
-ORDER BY
-    games_won desc;
--------------------
+-- SELECT
+--     t.team_name,
+--     count(g.game_id) as games_won
+-- FROM
+--     TEAM t,
+--     TEAM_GAME tg,
+--     GAME g
+-- WHERE
+--     t.team_id = tg.team1_id
+--     OR t.team_id = tg.team2_id
+--     AND tg.game_id = g.game_id
+--     AND g.game_winner = t.team_id
+-- GROUP BY
+--     t.team_name
+-- ORDER BY
+--     games_won desc;
+-- -------------------
+-- () select the winrate of the top 10 played heroes in a date range (using game_performance, game, and hero)
+-- SELECT
+--     hero_name,
+--     count(game_id) as games_played,
+--     count(CASE when game_winner = team_id then 1 end) as games_won,
+--     ROUND(count(CASE when game_winner = team_id then 1 end)/count(game_id), 2) as winrate
+-- FROM
+--     HERO,
+--     GAME_PERFORMANCE,
+--     GAME
+-- WHERE
+--     hero_id = hero_id_1
+--     OR hero_id = hero_id_2
+--     OR hero_id = hero_id_3
+--     OR hero_id = hero_id_4
+--     OR hero_id = hero_id_5
+--     AND game_id = game_id
+--     AND game_date BETWEEN '2017-01-01' AND '2017-12-31'
+-- GROUP BY
+--     hero_name
+-- ORDER BY
+--     games_played desc
+-- LIMIT
+--     10;
+-- -------------------
