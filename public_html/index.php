@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- https://getbootstrap.com/ -->
     <link rel="stylesheet" href="css/templatemo-style.css">
+    <link rel="stylesheet" href="css/dota_db_style.css">
     <!--
     Product Admin CSS Template
     https://templatemo.com/tm-524-product-admin
@@ -44,24 +45,13 @@
             </div> -->
             <!-- row -->
             <div class="row tm-content-row">
-                <!-- <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <div class="tm-bg-primary-dark tm-block">
-                        <h2 class="tm-block-title">Latest Hits</h2>
-                        <canvas id="lineChart"></canvas>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                    <div class="tm-bg-primary-dark tm-block">
-                        <h2 class="tm-block-title">Performance</h2>
-                        <canvas id="barChart"></canvas>
-                    </div>
-                </div> -->
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
                     <div class="tm-bg-primary-dark tm-block tm-block-taller">
                         <h2 class="tm-block-title">Welcome </h2>
                         <div id="stuffContainer">
                             <p class="text-white mt-5 mb-5">Welcome to the Dota DB Dashboard. Here you can view all the tables in the database, as well as a list of recent games.</p>
                             <p class="text-white mt-5 mb-5">Additional functions are found through the functions tab at the top.</p>
+                            <p class="text-white mt-5 mb-5">The database can be reset using the reset button above.  After resetting, the newly reset data can be viewed through the table buttons.</p>
                         </div>
                     </div>
                 </div>

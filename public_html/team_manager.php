@@ -199,7 +199,7 @@
                     <div class="tm-bg-primary-dark tm-block tm-block-taller">
                         <h2 class="tm-block-title">Move Player </h2>
                         <!-- a form for moving a player to a new team, given the player name or gamer name, and the new team name or team id -->
-                        <form action="../scripts/move_player.php" method="post">
+                        <form action="scripts/move_player.php" method="post">
                             <div class="form-group col-lg-6">
                                 <label for="team_name_option" class=>Move to team:</label>
                                 <select name="team_name" id="team_name" class="custom-select">
@@ -252,9 +252,18 @@
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
                     <div class="tm-bg-primary-dark tm-block tm-block-taller">
-                        <h2 class="tm-block-title">#TODO </h2>
+                        <h2 class="tm-block-title">Delete Player </h2>
                         <div id="stuffContainer">
+                            <!-- form for deleting a player -->
+                            <form action="dota_query.php" method="post" class="tm-signup-form row">
+                                <div class="form-group col-lg-6">
+                                    <label for="gamer_name">Player ID:</label>
+                                    <input type="text" id="player_id" name="player_id_delete" class="form-control validate" required>
+                                </div>
+                                <br>
+                                <input type="submit" value="Delete Player" class="btn btn-primary btn-block text-uppercase">
 
+                            </form>
                         </div>
                     </div>
                 </div>

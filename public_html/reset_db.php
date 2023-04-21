@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Query Result</title>
+    <title>RESET DATABASE</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
     <!-- https://fonts.google.com/specimen/Roboto -->
     <link rel="stylesheet" href="css/fontawesome.min.css">
@@ -40,11 +40,11 @@
             <div class="row tm-content-row">
                 <div class="col-12 tm-block-col">
                     <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-                        <h2 class="tm-block-title" id="table_title">Query Result</h2>
+                        <h2 class="tm-block-title" d="table_title">Query Result</h2>
                         <!-- php section -->
                         <?php
-                        header("refresh:3;url=index.php");
-                        // resets the database
+                        header("refresh:2;url=index.php");
+                        // show error trace
                         // ini_set('display_errors', 1);
                         // ini_set('display_startup_errors', 1);
                         // error_reporting(E_ALL);
@@ -56,18 +56,18 @@
                         $query_fk0 = "SET FOREIGN_KEY_CHECKS = 0;";
 
                         // a query to delete data from all tables
-                        $query_delete1 = "DELETE FROM TEAM;";
-                        $query_delete2 = "DELETE FROM HERO;";
-                        $query_delete3 = "DELETE FROM PLAYER;";
-                        $query_delete4 = "DELETE FROM TOURNAMENT;";
-                        $query_delete5 = "DELETE FROM ITEM;";
-                        $query_delete6 = "DELETE FROM ITEM_ABILITY;";
-                        $query_delete7 = "DELETE FROM GAME;";
-                        $query_delete8 = "DELETE FROM GAME_PERFORMANCE;";
-                        $query_delete9 = "DELETE FROM GAME_ITEMS;";
-                        $query_delete10 = "DELETE FROM TEAM_GAME;";
-                        $query_delete11 = "DELETE FROM TOURNAMENT_GAMES;";
-                        $query_delete12 = "DELETE FROM PLAYER_TEAM_HISTORY;";
+                        $query_delete1 = "TRUNCATE TABLE TEAM;";
+                        $query_delete2 = "TRUNCATE TABLE HERO;";
+                        $query_delete3 = "TRUNCATE TABLE PLAYER;";
+                        $query_delete4 = "TRUNCATE TABLE TOURNAMENT;";
+                        $query_delete5 = "TRUNCATE TABLE ITEM;";
+                        $query_delete6 = "TRUNCATE TABLE ITEM_ABILITY;";
+                        $query_delete7 = "TRUNCATE TABLE GAME;";
+                        $query_delete8 = "TRUNCATE TABLE GAME_PERFORMANCE;";
+                        $query_delete9 = "TRUNCATE TABLE GAME_ITEMS;";
+                        $query_delete10 = "TRUNCATE TABLE TEAM_GAME;";
+                        $query_delete11 = "TRUNCATE TABLE TOURNAMENT_GAMES;";
+                        $query_delete12 = "TRUNCATE TABLE PLAYER_TEAM_HISTORY;";
 
                         // concat and execute query as multi query
                         $query_delete = $query_delete1 . $query_delete2 . $query_delete3 . $query_delete4 . $query_delete5 . $query_delete6 . $query_delete7 . $query_delete8 . $query_delete9 . $query_delete10 . $query_delete11 . $query_delete12;

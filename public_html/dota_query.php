@@ -42,7 +42,6 @@
                     <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
                         <h2 class="tm-block-title" id="table_title">Query Result</h2>
                         <?php
-                        include('header.php');
                         // connect to database
                         $link = mysqli_connect("localhost", "jb240893", "ooc3kei8bahwei6ooF9aihoo4eedoo", "jb240893")
                             or die('Could not connect ');
@@ -70,9 +69,9 @@
                         }
 
                         if ($_POST['team_region']) {
-                            $team_id = $_POST['team_id'];
-                            $team_name = $_POST['team_name'];
-                            $team_region = $_POST['team_region'];
+                            $team_id = mysqli_real_escape_string($link, $_POST['team_id']);
+                            $team_name = mysqli_real_escape_string($link, $_POST['team_name']);
+                            $team_region = mysqli_real_escape_string($link, $_POST['team_region']);
                             //perform SQL query for the table with the button name, based on button name
                             $query = "INSERT INTO TEAM (team_id, team_name, team_region) VALUES ('$team_id', '$team_name', '$team_region')";
                             $selection = "SELECT * FROM TEAM WHERE team_id = '$team_id'";
@@ -90,11 +89,12 @@
                             } else {
                                 $team_id = 0;
                             }
-                            $player_name = $_POST['player_name'];
-                            $gamer_name = $_POST['gamer_name'];
-                            $player_role = $_POST['player_role'];
-                            $player_country = $_POST['player_country'];
-                            $player_region = $_POST['player_region'];
+                            $player_name = mysqli_real_escape_string($link, $_POST['player_name']);
+                            $gamer_name = mysqli_real_escape_string($link, $_POST['gamer_name']);
+                            $player_role = mysqli_real_escape_string($link, $_POST['player_role']);
+                            $player_country = mysqli_real_escape_string($link, $_POST['player_country']);
+                            $player_region = mysqli_real_escape_string($link, $_POST['player_region']);
+                            // sanitize inputs
                             //perform SQL query for the table with the button name, based on button name
                             $query = "INSERT INTO PLAYER (team_id, player_name, gamer_name, player_role, player_country, player_region) VALUES ('$team_id', '$player_name', '$gamer_name', '$player_role', '$player_country', '$player_region')";
                             $selection = "SELECT * FROM PLAYER WHERE gamer_name = '$gamer_name'";
@@ -141,8 +141,8 @@
 
 
                         }
-                        
-                        if($_POST['start_date']) {
+
+                        if ($_POST['start_date']) {
                             $start_date = $_POST['start_date'];
                             $end_date = $_POST['end_date'];
                             $query = "SELECT
@@ -164,12 +164,33 @@
                                 10;";
                         }
 
-                        // $clean_query = htmlspecialchars($query);
+                        if ($_POST['player_id_delete']) {
+                            $player_id = $_POST['player_id_delete'];
+                            $query_fk0 = "SET FOREIGN_KEY_CHECKS = 0";
+                            $execute_fk0 = mysqli_query($link, $query_fk0)
+                                or die("Query failed ");
 
-                        // echo $clean_query;
+                            $query2 = "DELETE FROM PLAYER WHERE player_id = $player_id";
 
-                        $result = mysqli_query($link, $query)
-                            or die("Query failed ");
+                            $execute2 = mysqli_query($link, $query2)
+                                or die("Query failed ");
+
+                            $query_fk1 = "SET FOREIGN_KEY_CHECKS = 1";
+                            $execute_fk1 = mysqli_query($link, $query_fk1)
+                                or die("Query failed ");
+                        }
+
+                        if ($_POST['completed_query']) {
+                            $query = $_POST['completed_query'];
+                            echo $query;
+                        }
+
+                        
+                        // handles all queries except for the delete query
+                        if (!$_POST['player_id_delete']) {
+                            $result = mysqli_query($link, $query)
+                                or die("Query failed ");
+                        }
 
 
                         // print results in html with a nicely formatted bootstrap table with column headings
@@ -185,28 +206,31 @@
                         if ($gamer_name) {
                             echo "<script>document.getElementById('table_title').innerHTML = '" . $gamer_name . " added to PLAYER';</script>";
                         }
-
-                        echo " <table id='results_table' class='table table-striped table-bordered table-hover table-condensed'>\n";
-                        // prints the column headings
-                        echo "\t<tr>\n";
-                        while ($fieldinfo = $result->fetch_field()) {
-                            echo "\t\t<td>$fieldinfo->name</td>\n";
-                            //echo"";
-                        }
-                        echo "\t</tr>\n";
-
-                        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-
+                        // handles all queries except for the delete query
+                        if (!$_POST['player_id_delete']) {
+                            echo " <table id='results_table' class='table table-striped table-bordered table-hover table-condensed'>\n";
+                            // prints the column headings
                             echo "\t<tr>\n";
-                            foreach ($row as $col_value) {
-                                echo "\t\t<td>$col_value</td>\n";
+
+                            while ($fieldinfo = $result->fetch_field()) {
+                                echo "\t\t<td>$fieldinfo->name</td>\n";
+                                //echo"";
                             }
                             echo "\t</tr>\n";
-                        }
-                        echo "</table>\n";
 
-                        //Free result set
-                        mysqli_free_result($result);
+                            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+
+                                echo "\t<tr>\n";
+                                foreach ($row as $col_value) {
+                                    echo "\t\t<td>$col_value</td>\n";
+                                }
+                                echo "\t</tr>\n";
+                            }
+                            echo "</table>\n";
+
+                            //Free result set
+                            mysqli_free_result($result);
+                        }
 
                         //close connection
                         mysqli_close($link);
