@@ -40,6 +40,8 @@
                         <h2 class="tm-block-title">Query with GPT</h2>
                         <div id="stuffContainer">
                             <p class="text-white mt-5 mb-5">AI powered natural language queries</p>
+                            <p class="text-white mt-5 mb-5">Only SELECT type queries are supported</p>
+                            <p class="text-white mt-5 mb-5">Example: get the players and teams where the team starts with A</p>
                         </div>
                     </div>
                 </div>
@@ -135,7 +137,9 @@
                         success: function (data) {
                             // extract the table from the data
                             var table = data.substring(data.indexOf("<table"), data.indexOf("</table>") + 8);
-                            console.log(table)
+                            console.log(table);
+                            // show the query
+                            alert("Your query is: " + completed_query);
                             // replace the table in the html
                             $("#result_table").html(table);
                             // remove the underscores from the results table column titles and capitalize the first letter of each word
