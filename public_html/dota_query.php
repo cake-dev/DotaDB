@@ -182,7 +182,7 @@
 
                         if ($_POST['completed_query']) {
                             $query = $_POST['completed_query'];
-                            echo $query;
+                            //echo $query;
                         }
 
                         

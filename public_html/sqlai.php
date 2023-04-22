@@ -40,15 +40,17 @@
                         <h2 class="tm-block-title">Query with GPT</h2>
                         <div id="stuffContainer">
                             <p class="text-white mt-5 mb-5">AI powered natural language queries</p>
-                            <p class="text-white mt-5 mb-5">Only SELECT type queries are supported</p>
-                            <p class="text-white mt-5 mb-5">Example: get the players and teams where the team starts with A</p>
+                            <p class="text-white mt-5 mb-5">Only SELECT type queries are currently supported</p>
+                            <p class="text-white mt-5 mb-5">The preface to the completion query is: "A query to "<br>
+                            User input is appended to the end of the preface<br><br>
+                            <b>Example</b>: (A query to) get the players and teams where the team starts with the letter A</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
                     <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-overflow">
                         <h2 class="tm-block-title">Input area</h2>
-                        <textarea name="query_text" id="query_textarea" rows="3" cols="50" placeholder="Enter your query here" class="form-control validate" required></textarea>
+                        <textarea name="query_text" id="query_textarea" rows="4" cols="50" placeholder="Enter your query here" class="form-control validate" required></textarea>
                         <input type="submit" value="Submit" class="btn btn-primary btn-block text-uppercase" id="query_submit">
                     </div>
                 </div>
@@ -76,26 +78,11 @@
                 OpenaiFetchAPI();
             });
 
-            function myFunction() {
-                const textareaValue = query_text.value;
-                // do something with the textarea value
-
-                var sql_prompt_json = {
-                    "model": "text-davinci-003",
-                    "prompt": "### MariaDB SQL tables, with their properties:\n#\n# GAME(game_id, game_winner, game_duration, game_date)\n# GAME_ITEMS(hero_id, game_id, item_id_1, item_id_2, item_id_3, item_id_4, item_id_5)\n# GAME_PERFORMANCE(g_kills, g_deaths, g_assists, g_xpm, g_gpm, g_last_hits, g_denies, g_hero_damage, g_hero_healing, g_level, g_win, player_id, game_id, hero_id)\n# HERO(hero_id, hero_name, hero_main_stat, str_base, str_gain, str_30, agi_base, agi_gain, agi_30, int_base, int_gain, int_30, attack_type, attack_range, damange_base, armor_base, move_speed_base, turn_rate)\n# ITEM(item_id, item_name, item_cost, str_bonus, agi_bonus, int_bonus, health_bonus, mana_bonus, hp_regen_bonus, mana_regen_bonus, armor_bonus, evasion_bonus, resistance_bonus, spell_amp_bonus, damage_bonus, attack_speed_bonus, move_speed_bonus, item_type)\n# ITEM_ABILITY(item_id, ability_1, ability_2, ability_3)\n# PLAYER(player_id, player_name, gamer_name, player_role, player_country, player_region, player_rank, team_id)\n# PLAYER_TEAM_HISTORY(player_id, team_id, join_date, leave_date)\n# TEAM(team_id, team_name, team_region, team_winnings)\n# TEAM_GAME(team1_id, team2_id, game_id)\n# TOURNAMENT(t_id, t_name, t_date, t_prize, t_winner)\n# TOURNAMENT_GAMES(t_id, game_id)\n#\n### A query to " + textareaValue + " \nSELECT ",
-                    "temperature": 0,
-                    "max_tokens": 150,
-                    "top_p": 1,
-                    "frequency_penalty": 0,
-                    "presence_penalty": 0,
-                    "stop": ["#", ";"]
-                }
-            }
-
             function OpenaiFetchAPI() {
                 console.log("Calling GPT3")
+
                 var url = "https://api.openai.com/v1/completions";
-                var bearer = 'Bearer ' + 'API_KEY'
+                var bearer = 'Bearer ' + 'API_KEY_HERE'
                 const textareaValue = query_text.value;
                 fetch(url, {
                     method: 'POST',
@@ -139,10 +126,10 @@
                             var table = data.substring(data.indexOf("<table"), data.indexOf("</table>") + 8);
                             console.log(table);
                             // show the query
-                            alert("Your query is: " + completed_query);
-                            // replace the table in the html
+                            alert("Your query is: \n" + completed_query);
+                            // populates the table with the result data
                             $("#result_table").html(table);
-                            // remove the underscores from the results table column titles and capitalize the first letter of each word
+                            // removes the underscores from the results table column titles and capitalize the first letter of each word
                             fixTable();
                         }
                     });
